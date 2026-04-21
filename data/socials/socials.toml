@@ -1,0 +1,12 @@
+[[socials]]
+href = 'https://x.com/markwaveio'
+target = '_blank'
+title = 'X'
+icon = 'logo-x'
+
+[[socials]]
+href = 'https://github.com/markwaveio'
+target = '_blank'
+title = 'GitHub'
+icon = 'logo-github'
+

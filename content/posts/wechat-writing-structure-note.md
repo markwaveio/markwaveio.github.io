@@ -3,6 +3,8 @@ title = "公众号写作结构笔记"
 date = 2026-04-21T10:10:00+08:00
 draft = false
 description = "一篇来自 Obsidian 的公众号写作结构短笔记。"
+categories = ["写作"]
+tags = ["公众号", "写作结构", "内容创作"]
 +++
 
 这是一条关于公众号写作的结构笔记。
