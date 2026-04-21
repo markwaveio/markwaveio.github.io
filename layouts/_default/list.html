@@ -1,6 +1,7 @@
 {{ define "main" }}
 <section class="section">
   <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lead">{{ . }}</p>{{ end }}
   <ul class="post-list">
     {{ range .Pages }}
       <li>
@@ -11,4 +12,3 @@
   </ul>
 </section>
 {{ end }}
-

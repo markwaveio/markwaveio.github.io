@@ -64,6 +64,11 @@ a:hover {
   gap: 20px;
 }
 
+.site-footer .wrap {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .hero,
 .section,
 .article {
@@ -94,6 +99,9 @@ a:hover {
 
 .actions {
   margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .button {
@@ -127,3 +135,57 @@ a:hover {
   margin: 0 0 16px;
 }
 
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .site-header .wrap {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .post-list li,
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+    <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}">
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="/css/site.css">
   </head>
   <body>
@@ -12,8 +17,9 @@
       <div class="wrap">
         <a class="brand" href="/">{{ site.Title }}</a>
         <nav class="nav">
-          <a href="/">首页</a>
-          <a href="/posts/">博客</a>
+          {{ range site.Menus.main }}
+            <a href="{{ .URL }}">{{ .Name }}</a>
+          {{ end }}
         </nav>
       </div>
     </header>
@@ -23,8 +29,12 @@
     <footer class="site-footer">
       <div class="wrap">
         <p>© {{ now.Year }} {{ site.Title }}. Built with Hugo and GitHub Pages.</p>
+        <p class="footer-links">
+          <a href="{{ site.Params.x_url }}">X</a>
+          <a href="{{ site.Params.github_url }}">GitHub</a>
+          <a href="mailto:{{ site.Params.email }}">Email</a>
+        </p>
       </div>
     </footer>
   </body>
 </html>
-
