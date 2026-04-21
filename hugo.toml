@@ -1,0 +1,13 @@
+baseURL = 'https://markwaveio.github.io/'
+languageCode = 'zh-cn'
+title = 'MarkWave'
+
+[params]
+  description = 'MarkWave 的个人品牌主页与博客'
+  author = 'Mark'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
