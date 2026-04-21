@@ -17,17 +17,21 @@ title = 'MarkWave'
     pageRef = '/posts'
     weight = 20
   [[menu.main]]
-    name = '分类'
+    name = '视频教程'
     url = '/categories/'
     weight = 30
   [[menu.main]]
-    name = '标签'
+    name = '工具&导航'
     url = '/tags/'
     weight = 40
   [[menu.main]]
+    name = '工具&导航'
+    url = '/tags/'
+    weight = 50
+  [[menu.main]]
     name = '合作'
     pageRef = '/cooperation'
-    weight = 50
+    weight = 60
 
 [params]
   author = 'Mark'
