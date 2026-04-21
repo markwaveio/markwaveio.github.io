@@ -1,0 +1,12 @@
+[build]
+  command = "hugo --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.148.2"
+  HUGO_ENABLEGITINFO = "true"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
