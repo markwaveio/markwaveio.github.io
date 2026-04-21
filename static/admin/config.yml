@@ -1,0 +1,76 @@
+backend:
+  name: github
+  repo: markwaveio/markwaveio.github.io
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+site_url: https://markwaveio.github.io
+display_url: https://markwaveio.github.io
+locale: zh_Hans
+publish_mode: editorial_workflow
+media_folder: static/uploads
+public_folder: /uploads
+
+slug:
+  encoding: unicode
+  clean_accents: false
+  sanitize_replacement: "-"
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: content/posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "posts/{{slug}}/"
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 发布日期, name: date, widget: datetime, format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: true }
+      - { label: 封面图, name: cover, widget: image, required: false }
+      - { label: 摘要, name: description, widget: text, required: false }
+      - { label: 分类, name: categories, widget: list, required: false, default: ["公众号文章"] }
+      - { label: 标签, name: tags, widget: list, required: false }
+      - { label: 状态, name: status, widget: select, options: ["草稿", "已发布"], default: "已发布", required: false }
+      - { label: 正文, name: body, widget: markdown }
+
+  - name: pages
+    label: 页面
+    files:
+      - label: 首页文案
+        name: home
+        file: content/_index.md
+        fields:
+          - { label: 标题, name: title, widget: string, required: false }
+          - { label: 正文, name: body, widget: markdown, required: false }
+      - label: 联系页面
+        name: contact
+        file: content/contact.md
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 正文, name: body, widget: markdown }
+      - label: 合作页面
+        name: cooperation
+        file: content/cooperation/_index.md
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 正文, name: body, widget: markdown }
+
+  - name: ads
+    label: 广告位
+    files:
+      - label: 侧边栏广告
+        name: sidebar_ads
+        file: data/ads/ads.toml
+        format: toml
+        fields:
+          - label: 广告列表
+            name: ads
+            widget: list
+            fields:
+              - { label: 标题, name: title, widget: string }
+              - { label: 描述, name: description, widget: text }
+              - { label: 链接, name: url, widget: string }
