@@ -131,6 +131,12 @@ a:hover {
   border-bottom: 1px solid var(--line);
 }
 
+.post-list p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .content p {
   margin: 0 0 16px;
 }

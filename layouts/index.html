@@ -57,7 +57,10 @@
   <ul class="post-list">
     {{ range first 5 (where site.RegularPages "Section" "posts") }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <div>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ with .Description }}<p>{{ . }}</p>{{ end }}
+        </div>
         <span>{{ .Date.Format "2006-01-02" }}</span>
       </li>
     {{ end }}
