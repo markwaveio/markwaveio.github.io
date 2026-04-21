@@ -316,6 +316,7 @@ a:hover {
 
 .article {
   padding: min(6vw, 44px);
+  overflow: hidden;
 }
 
 .article h1 {
@@ -345,6 +346,33 @@ a:hover {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.article-body img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+  border-radius: 14px;
+}
+
+.article-body p:has(img) {
+  margin: 24px 0;
+}
+
+.article-body figure {
+  margin: 28px 0;
+}
+
+.article-body figure img {
+  margin: 0 auto;
+}
+
+.article-body pre,
+.article-body table {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .article-ad {
