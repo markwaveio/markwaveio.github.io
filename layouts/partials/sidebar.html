@@ -1,7 +1,7 @@
 <aside class="sidebar">
   <section class="widget ad-widget">
     <p class="widget-label">广告位</p>
-    {{ range first 1 site.Data.ads.ads }}
+    {{ range first 1 site.Data.ads.ads.ads }}
       <a class="ad-card" href="{{ .url }}" target="_blank" rel="sponsored noopener">
         <strong>{{ .title }}</strong>
         <span>{{ .description }}</span>
@@ -37,4 +37,3 @@
     </div>
   </section>
 </aside>
-

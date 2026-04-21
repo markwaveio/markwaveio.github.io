@@ -6,9 +6,10 @@
   <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
   {{ with .Description }}<p>{{ . }}</p>{{ else }}<p>{{ .Summary | plainify | truncate 120 }}</p>{{ end }}
   <div class="post-tags">
-    {{ range first 4 .Params.tags }}
-      <a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>
+    {{ with .Params.tags }}
+      {{ range first 4 . }}
+        <a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>
+      {{ end }}
     {{ end }}
   </div>
 </article>
-
