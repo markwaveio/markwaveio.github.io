@@ -7,4 +7,9 @@ title: 联系方式
 - Email: <hello@markwave.io>
 - X: <https://x.com/markwaveio>
 - GitHub: <https://github.com/markwaveio>
+- 微信公众号：马克波markwave
+- 小红书：马克波markwave
+- 知乎：马克波markwave
+- youtube：马克波markwave
+- B站：马克波markwave
 
