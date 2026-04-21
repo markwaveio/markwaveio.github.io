@@ -1,15 +1,18 @@
 <article class="post-card">
-  <div class="post-meta">
-    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-    {{ with index .Params.categories 0 }}<span>{{ . }}</span>{{ end }}
-  </div>
-  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-  {{ with .Description }}<p>{{ . }}</p>{{ else }}<p>{{ .Summary | plainify | truncate 120 }}</p>{{ end }}
-  <div class="post-tags">
-    {{ with .Params.tags }}
-      {{ range first 4 . }}
-        <a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>
-      {{ end }}
+  <a class="post-cover" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+    {{ with .Params.cover }}
+      <img src="{{ . }}" alt="{{ $.Title }}">
+    {{ else }}
+      <div class="post-cover-placeholder">
+        <span>{{ site.Title }}</span>
+      </div>
     {{ end }}
+  </a>
+  <div class="post-card-body">
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="post-date">
+      <span aria-hidden="true">▣</span>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年1月2日" }}</time>
+    </div>
   </div>
 </article>

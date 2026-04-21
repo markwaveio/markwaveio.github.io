@@ -1,6 +1,8 @@
 ---
 categories: 公众号文章
+date: 2026-02-27T19:32:00+08:00
 status: 已发布
+cover: https://cdn.jsdelivr.net/gh/markcocoYang/Picgo@main/20260227193231002.png
 tags:
   - WeChatPublicAccount
   - SkillsSystem
