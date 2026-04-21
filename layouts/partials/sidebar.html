@@ -1,0 +1,40 @@
+<aside class="sidebar">
+  <section class="widget ad-widget">
+    <p class="widget-label">广告位</p>
+    {{ range first 1 site.Data.ads.ads }}
+      <a class="ad-card" href="{{ .url }}" target="_blank" rel="sponsored noopener">
+        <strong>{{ .title }}</strong>
+        <span>{{ .description }}</span>
+      </a>
+    {{ end }}
+    <a class="text-link" href="/cooperation/">查看合作方式 →</a>
+  </section>
+
+  <section class="widget">
+    <h2>近期文章</h2>
+    <ul class="compact-list">
+      {{ range first 6 (where site.RegularPages "Section" "posts") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+
+  <section class="widget">
+    <h2>分类</h2>
+    <div class="tag-cloud">
+      {{ range site.Taxonomies.categories }}
+        <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="widget">
+    <h2>标签</h2>
+    <div class="tag-cloud">
+      {{ range first 18 site.Taxonomies.tags.ByCount }}
+        <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+      {{ end }}
+    </div>
+  </section>
+</aside>
+

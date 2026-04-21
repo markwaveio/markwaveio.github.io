@@ -2,37 +2,43 @@ baseURL = 'https://markwaveio.github.io/'
 defaultContentLanguage = 'zh'
 languageCode = 'zh-Hans'
 title = 'MarkWave'
-theme = 'dream'
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[menu]
+  [[menu.main]]
+    name = '首页'
+    pageRef = '/'
+    weight = 10
+  [[menu.main]]
+    name = '文章'
+    pageRef = '/posts'
+    weight = 20
+  [[menu.main]]
+    name = '分类'
+    url = '/categories/'
+    weight = 30
+  [[menu.main]]
+    name = '标签'
+    url = '/tags/'
+    weight = 40
+  [[menu.main]]
+    name = '合作'
+    pageRef = '/cooperation'
+    weight = 50
 
 [params]
   author = 'Mark'
   description = 'MarkWave 的个人品牌主页，分享 AI、效率系统、内容创作与个人品牌运营。'
-  avatar = 'img/avatar.svg'
-  headerTitle = 'MarkWave'
-  motto = '把内容、能力和长期品牌，沉淀成自己的数字资产。'
-  lightTheme = 'emerald'
-  darkTheme = 'forest'
-  stickyNav = true
   rss = true
   siteStartYear = 2026
-  reorderNavItems = ['about', 'search', 'posts', 'categories', 'tags', 'rss', 'github']
-  collapseNavItems = ['posts', 'categories', 'tags', 'rss']
-  showTableOfContents = true
-  showPrevNextPost = true
   email = 'hello@markwave.io'
-
-  [params.navItems.github]
-    href = 'https://github.com/markwaveio'
-    target = '_blank'
-    icon = 'logo-github'
-    title = 'GitHub'
-
-  [params.advanced]
-    customCSS = ['css/custom.css']
-
-  [params.experimental]
-    jsDate = true
-    jsDateFormat = 'yyyy年MM月dd日'
+  x_url = 'https://x.com/markwaveio'
+  github_url = 'https://github.com/markwaveio'
+  hero_title = 'AI、效率系统与个人品牌的实践笔记'
+  hero_description = '这里沉淀我关于 AI 工具、内容创作、知识管理和个体效率系统的长期观察。目标是少一点噪音，多一点可执行经验。'
 
 [markup]
   [markup.goldmark]

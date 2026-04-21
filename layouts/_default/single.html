@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="container layout page-layout">
+  <article class="article">
+    <p class="eyebrow">{{ if eq .Section "posts" }}文章{{ else }}页面{{ end }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "posts" }}
+      <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span>{{ .ReadingTime }} 分钟阅读</span>
+      </div>
+    {{ end }}
+    <div class="article-body">
+      {{ .Content }}
+    </div>
+    {{ partial "article-ad.html" . }}
+  </article>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}
+

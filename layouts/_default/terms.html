@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="container layout page-layout">
+  <section class="content-column">
+    <p class="eyebrow">Taxonomy</p>
+    <h1>{{ .Title }}</h1>
+    <div class="term-grid">
+      {{ range .Data.Terms.Alphabetical }}
+        <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span>{{ .Count }}</span></a>
+      {{ end }}
+    </div>
+  </section>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}
+

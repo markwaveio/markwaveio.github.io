@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">MarkWave Blog</p>
+    <h1>{{ site.Params.hero_title }}</h1>
+    <p>{{ site.Params.hero_description }}</p>
+  </div>
+</section>
+
+<div class="container layout">
+  <section class="content-column">
+    <div class="section-head">
+      <h2>最新文章</h2>
+      <a href="/posts/">全部文章</a>
+    </div>
+    <div class="post-list">
+      {{ range first 12 (where site.RegularPages "Section" "posts") }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}
+

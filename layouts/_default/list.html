@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="container layout page-layout">
+  <section class="content-column">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Archive</p>
+        <h1>{{ .Title }}</h1>
+      </div>
+    </div>
+    <div class="post-list">
+      {{ range .Pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}
+
