@@ -25,8 +25,8 @@ title = 'MarkWave'
     url = '/tags/'
     weight = 40
   [[menu.main]]
-    name = '工具&导航'
-    url = '/tags/'
+    name = '人工咨询'
+    url = '/Q&A/'
     weight = 50
   [[menu.main]]
     name = '合作'
