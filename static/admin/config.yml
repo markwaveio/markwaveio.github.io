@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: markwaveio/markwaveio.github.io
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 site_url: https://markwaveio.github.io
 display_url: https://markwaveio.github.io
