@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarkWave | AI 工作流与技术服务</title>
+  <link rel="stylesheet" href="./brand/markwave-brand.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(126, 177, 255, 0.24), transparent 22%),
+        radial-gradient(circle at 90% 14%, rgba(95, 220, 255, 0.18), transparent 20%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 46%, #ffffff 100%);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: var(--container); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--header-bg);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(209, 220, 255, 0.54);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: auto;
+      max-height: 48px;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.15;
+    }
+
+    .brand-mark {
+      display: block;
+      width: 48px;
+      height: auto;
+      max-height: 48px;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      display: none;
+    }
+
+    .brand-copy strong {
+      color: #0000ec;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .nav a {
+      padding: 6px 8px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      border-radius: 6px;
+      transition: background .12s, color .12s;
+    }
+
+    .nav a:hover {
+      background: rgba(0,0,0,0.04);
+    }
+
+    .hero {
+      position: relative;
+      padding: 64px 0 56px;
+      background: url("images/hero-bg.png") right center/cover no-repeat,
+        radial-gradient(circle at 10% 20%, rgba(126, 177, 255, 0.24), transparent 22%),
+        radial-gradient(circle at 90% 14%, rgba(95, 220, 255, 0.18), transparent 20%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 46%, #ffffff 100%);
+      background-attachment: scroll;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      margin-left: auto;
+      max-width: 560px;
+      padding-right: 40px;
+      text-align: left;
+      padding-top: 18px;
+    }
+
+    .hero-visual {
+      display: none;
+    }
+
+    .eyebrow {
+      color: #9aa1b7;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1.28;
+      letter-spacing: -.035em;
+      color: #27385f;
+      max-width: 620px;
+    }
+
+    .hero .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      margin-top: 34px;
+      background: linear-gradient(135deg, #5677ff 0%, #7454ff 100%);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 14px 32px rgba(82, 104, 255, .28);
+    }
+
+    .hero .cta span:last-child {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 430px;
+      background: url("images/hero-bg.png") center/cover no-repeat;
+    }
+
+    .cloud-stack {
+      display: none;
+    }
+
+    .cloud-glow {
+      position: absolute;
+      inset: 6% 0 0 0;
+      background: radial-gradient(circle at center, rgba(102, 221, 255, .65), rgba(79, 126, 255, .42) 40%, rgba(255,255,255,0) 72%);
+      filter: blur(18px);
+    }
+
+    .plate {
+      position: absolute;
+      inset: auto 8% 10% 8%;
+      height: 25%;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(19,83,255,.95), rgba(60,210,255,.86));
+      box-shadow: 0 24px 36px rgba(44, 96, 255, 0.34);
+      transform: perspective(900px) rotateX(58deg);
+    }
+
+    .plate::after {
+      content: "";
+      position: absolute;
+      inset: 14% 10%;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.34);
+    }
+
+    .cloud {
+      position: absolute;
+      inset: 14% 18% 24% 18%;
+      border-radius: 38% 38% 34% 34% / 40% 40% 36% 36%;
+      background: linear-gradient(145deg, rgba(192, 245, 255, .98), rgba(88, 215, 255, .78));
+      box-shadow:
+        inset 0 1px 10px rgba(255,255,255,.62),
+        0 18px 38px rgba(62, 133, 255, 0.28);
+      display: grid;
+      place-items: center;
+      transform: translateY(6px);
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .cloud::before {
+      width: 38%;
+      height: 38%;
+      left: 10%;
+      top: -10%;
+    }
+
+    .cloud::after {
+      width: 46%;
+      height: 46%;
+      right: 8%;
+      top: -16%;
+    }
+
+    .visual-cube,
+    .visual-bubble {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .visual-bubble {
+      width: 58px;
+      height: 58px;
+      left: 22%;
+      top: 4%;
+      border-radius: 18px 18px 22px 22px;
+      background: linear-gradient(145deg, rgba(217, 104, 255, .86), rgba(121, 121, 255, .74));
+      box-shadow: 0 18px 30px rgba(132, 84, 255, .25);
+    }
+
+    .visual-cube {
+      width: 42px;
+      height: 42px;
+      right: 10%;
+      top: 24%;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(74, 114, 255, .84), rgba(76, 210, 255, .68));
+      box-shadow: 0 14px 24px rgba(66, 109, 255, .24);
+      transform: rotate(18deg);
+    }
+
+    .hero-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-dots span {
+      width: 18px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(95, 121, 255, .18);
+    }
+
+    .hero-dots span.active {
+      width: 24px;
+      background: linear-gradient(90deg, #5e76ff, #87dfff);
+    }
+
+    .intro {
+      padding: 18px 0 34px;
+      text-align: center;
+    }
+
+    .intro h2,
+    .news h2,
+    .partners h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      letter-spacing: -.04em;
+      color: #24365e;
+    }
+
+    .intro p {
+      margin: 0 auto;
+      color: var(--muted);
+      max-width: 980px;
+      font-size: 1rem;
+    }
+
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+      margin-top: 54px;
+      align-items: start;
+    }
+
+    .product-card {
+      text-align: center;
+      color: #16295b;
+    }
+
+    .product-link {
+      display: block;
+      color: inherit;
+    }
+
+    .service-media {
+      width: min(100%, 264px);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background-color: #dfe9ff;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 12px 34px rgba(82, 104, 255, .12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 72% 26%, rgba(255, 184, 218, .34), transparent 24%),
+        radial-gradient(circle at 22% 72%, rgba(89, 163, 255, .18), transparent 30%);
+      mix-blend-mode: screen;
+    }
+
+    .service-media.a {
+      background-image:
+        linear-gradient(180deg, rgba(230,240,255,.10), rgba(220,230,255,.08)),
+        url("https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .service-media.b {
+      background-image:
+        linear-gradient(180deg, rgba(230,240,255,.10), rgba(220,230,255,.08)),
+        url("https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .service-media.c {
+      background-image:
+        linear-gradient(180deg, rgba(230,240,255,.10), rgba(220,230,255,.08)),
+        url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .service-media.d {
+      background-image:
+        linear-gradient(180deg, rgba(230,240,255,.10), rgba(220,230,255,.08)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .product-title {
+      margin: 0;
+      font-size: clamp(1.7rem, 2vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: #111827;
+    }
+
+    .product-tagline {
+      margin: 14px 0 0;
+      color: #4f58d9;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .product-list {
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 0;
+      color: #5f6ca9;
+      font-size: .98rem;
+      line-height: 1.7;
+    }
+
+    .product-list li {
+      margin: 2px 0;
+    }
+
+    .product-price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 184px;
+      min-height: 58px;
+      margin-top: 28px;
+      padding: 0 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1b1f77, #2e2f8f);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      box-shadow: 0 12px 24px rgba(36, 46, 138, .18);
+    }
+
+    .dark-products {
+      position: relative;
+      margin-top: 34px;
+      background: var(--section-dark);
+      color: #fff;
+      padding: 86px 0 92px;
+      overflow: hidden;
+    }
+
+    .dark-products::before {
+      content: "";
+      position: absolute;
+      inset: 16% auto auto 18%;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107, 134, 255, .22), rgba(255,255,255,0));
+    }
+
+    .dark-products h2 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      letter-spacing: -.04em;
+    }
+
+    .dark-tabs {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+    }
+
+    .dark-tab {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.72);
+      font-size: .98rem;
+      font-weight: 600;
+      padding: 0 0 14px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dark-tab.active,
+    .dark-tab[aria-selected="true"] {
+      color: #fff;
+    }
+
+    .dark-tab.active::after,
+    .dark-tab[aria-selected="true"]::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      width: 44px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #6fc2ff, #7a72ff);
+      transform: translateX(-50%);
+    }
+
+    .feature-carousel {
+      margin-top: 52px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .feature-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(280px, 32%);
+      gap: 26px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 8px 6px 16px;
+      scrollbar-width: none;
+    }
+
+    .feature-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .feature-slide {
+      scroll-snap-align: center;
+      transition: transform .28s ease, opacity .28s ease;
+      opacity: .72;
+      transform: scale(.94);
+    }
+
+    .feature-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .feature-panel {
+      min-height: 236px;
+      border-radius: 30px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(7, 15, 75, .22);
+      background: linear-gradient(150deg, rgba(21, 46, 146, .74), rgba(51, 63, 182, .48));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .feature-panel::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -8%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(95, 220, 255, .26), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .feature-panel.secondary::before {
+      inset: auto -12% -18% auto;
+    }
+
+    .feature-panel h3 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -.04em;
+      line-height: 1.2;
+    }
+
+    .feature-panel p {
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.76);
+      max-width: 90%;
+    }
+
+    .feature-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      margin-top: 24px;
+      background: rgba(255,255,255,.96);
+      color: #3c54cf;
+      font-weight: 800;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-panel.main {
+      background:
+        radial-gradient(circle at 80% 78%, rgba(118, 255, 255, .34), rgba(255,255,255,0) 26%),
+        linear-gradient(135deg, rgba(91, 121, 255, .98), rgba(109, 80, 255, .92));
+    }
+
+    .feature-panel.main::after {
+      content: "";
+      position: absolute;
+      right: 22px;
+      bottom: 18px;
+      width: 118px;
+      height: 88px;
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(201, 246, 255, .94), rgba(101, 233, 255, .72));
+      box-shadow: inset 0 1px 8px rgba(255,255,255,.5), 0 18px 28px rgba(39, 123, 255, .24);
+      transform: skewX(-8deg);
+      opacity: .95;
+    }
+
+    .feature-panel.side {
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.9);
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .feature-arrow {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: 1.2rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(7, 15, 75, .18);
+      transition: transform .16s ease, background .16s ease;
+    }
+
+    .feature-arrow:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.16);
+    }
+
+    .news {
+      padding: 88px 0 70px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head a {
+      color: #6d79a2;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+      gap: 36px;
+      align-items: start;
+    }
+
+    .news-feature {
+      background: #fff;
+      border: 1px solid rgba(224, 230, 255, .9);
+      border-radius: 28px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .news-feature time {
+      display: block;
+      padding: 22px 24px 0;
+      color: #8390b3;
+      font-weight: 600;
+    }
+
+    .news-cover {
+      margin: 18px 24px 14px;
+      min-height: 220px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 24, 96, .98), rgba(38, 67, 181, .92) 44%, rgba(132, 82, 255, .82)),
+        radial-gradient(circle at 70% 26%, rgba(112, 255, 255, .34), rgba(255,255,255,0) 18%);
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .news-cover::before,
+    .news-cover::after {
+      content: "";
+      position: absolute;
+      border-radius: 22px;
+      transform: rotate(12deg);
+    }
+
+    .news-cover::before {
+      width: 86px;
+      height: 86px;
+      right: 18%;
+      top: 18%;
+      background: linear-gradient(135deg, rgba(153, 255, 255, .92), rgba(75, 161, 255, .8));
+      box-shadow: 0 18px 28px rgba(0,0,0,.16);
+    }
+
+    .news-cover::after {
+      width: 128px;
+      height: 128px;
+      right: 8%;
+      top: 32%;
+      background: linear-gradient(135deg, rgba(125, 110, 255, .92), rgba(80, 232, 255, .72));
+      opacity: .72;
+    }
+
+    .cover-copy {
+      position: absolute;
+      left: 22px;
+      top: 22px;
+      color: rgba(255,255,255,.94);
+    }
+
+    .cover-copy strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-top: 8px;
+      letter-spacing: -.02em;
+    }
+
+    .news-feature h3 {
+      margin: 0;
+      padding: 0 24px 8px;
+      font-size: 1.06rem;
+      line-height: 1.55;
+      color: #253760;
+    }
+
+    .news-feature p {
+      margin: 0;
+      padding: 0 24px 26px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 94px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(226, 231, 249, .88);
+    }
+
+    .news-item time {
+      color: #9aa3be;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .news-item h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: #2d3d67;
+      line-height: 1.45;
+    }
+
+    .news-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .news-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #6a77a3;
+      border: 1px solid rgba(205, 214, 244, .86);
+    }
+
+    .partners {
+      padding: 6px 0 0;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px 22px;
+      margin-top: 28px;
+    }
+
+    .logo-item {
+      min-height: 70px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: #7d86a5;
+      font-weight: 800;
+      letter-spacing: .02em;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(223, 230, 255, .86);
+      box-shadow: 0 8px 18px rgba(86, 107, 196, 0.06);
+    }
+
+    .partner-controls {
+      display: flex;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .control {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid rgba(216, 224, 251, .92);
+      color: #7181b0;
+      box-shadow: var(--shadow-sm);
+      font-size: 1.06rem;
+    }
+
+    .control.active {
+      color: #fff;
+      background: linear-gradient(135deg, #6488ff, #57ccff);
+      border-color: transparent;
+    }
+
+    .site-footer {
+      position: relative;
+      margin-top: 44px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 16% 8%, rgba(86, 204, 255, .34), rgba(255,255,255,0) 18%),
+        linear-gradient(135deg, #724bff 0%, #5665ff 46%, #4ab9ff 100%);
+      overflow: hidden;
+    }
+
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      top: -92px;
+      height: 180px;
+      background: #fff;
+      border-bottom-left-radius: 50% 100%;
+      border-bottom-right-radius: 50% 100%;
+    }
+
+    .footer-inner {
+      position: relative;
+      padding: 148px 0 52px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr .9fr;
+      gap: 32px;
+    }
+
+    .footer-brand p,
+    .footer-col p {
+      margin: 0;
+      color: rgba(255,255,255,.76);
+      font-size: .94rem;
+    }
+
+    .footer-brand .brand {
+      margin-bottom: 22px;
+    }
+
+    .footer-col h3 {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      letter-spacing: .02em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: rgba(255,255,255,.78);
+      font-size: .94rem;
+    }
+
+    .qr {
+      width: 108px;
+      aspect-ratio: 1;
+      border-radius: 14px;
+      padding: 8px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 16px 28px rgba(31, 44, 140, .18);
+    }
+
+    .qr-grid {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background:
+        linear-gradient(90deg, #000 10%, transparent 10%, transparent 20%, #000 20%, #000 30%, transparent 30%, transparent 40%, #000 40%, #000 50%, transparent 50%, transparent 60%, #000 60%, #000 70%, transparent 70%, transparent 80%, #000 80%, #000 90%, transparent 90%),
+        linear-gradient(#000 10%, transparent 10%, transparent 20%, #000 20%, #000 30%, transparent 30%, transparent 40%, #000 40%, #000 50%, transparent 50%, transparent 60%, #000 60%, #000 70%, transparent 70%, transparent 80%, #000 80%, #000 90%, transparent 90%);
+      background-size: 100% 100%;
+      opacity: .92;
+    }
+
+    .copyright {
+      position: relative;
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.66);
+      font-size: .86rem;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .news-grid,
+      .footer-inner { grid-template-columns: 1fr; }
+      .product-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .hero-copy { margin-left: 0; text-align: center; }
+      .site-footer::before { top: -68px; height: 130px; }
+      .footer-inner { padding-top: 110px; }
+      .feature-carousel { grid-template-columns: 1fr; }
+      .feature-arrow { display: none; }
+      .feature-track { grid-auto-columns: minmax(320px, 78%); }
+    }
+
+    @media (max-width: 760px) {
+      .nav { display: flex; gap: 12px; flex-wrap: wrap; }
+      .hero { padding-top: 32px; }
+      .hero-copy { margin-left: 0; text-align: center; }
+      .container { width: min(100% - 24px, 1180px); }
+      .hero h1 { font-size: 2.4rem; }
+      .product-cards { grid-template-columns: 1fr; gap: 34px; }
+      .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .news-item { grid-template-columns: 1fr; gap: 8px; }
+      .feature-panel.side { min-height: 170px; }
+      .feature-track { grid-auto-columns: 88%; gap: 18px; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <img class="brand-mark" src="images/markwave-icon.svg" alt="MarkWave logo">
+        <span class="brand-copy">
+          <strong>MarkWave</strong>
+          <small>AI Workflow Studio</small>
+        </span>
+      </a>
+      <nav class="nav">
+        <a class="active" href="#">首页</a>
+        <a href="#products">服务</a>
+        <a href="#solutions">解决方案</a>
+        <a href="#news">内容与案例</a>
+        <a href="#about">关于我</a>
+        <a href="#careers">联系我</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>加速 Agent 生产力<br>放大你的品牌影响力</h1>
+          <div class="eyebrow">我帮助创作者、创业者，建立可复制的
+
+内容系统、自动化流程与Agent工具系统
+
+让你的时间更值钱！</div>
+          <a class="cta" href="#products">
+            <span>立即咨询</span>
+            <span>→</span>
+          </a>
+        </div>
+        <div class="hero-visual" aria-hidden="true"></div>
+      </div>
+      <div class="hero-dots" aria-hidden="true">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="intro container" id="products">
+      <h2>选择适合你的服务</h2>
+      <p>
+        我帮助创作者、独立开发者与高执行力个体，把 AI 工具、自动化工作流、网站与服务页整合成真正可执行的业务系统。
+        重点不只是“会用工具”，而是让内容、产品、转化与交付跑成闭环。
+      </p>
+
+      <div class="product-cards">
+        <article class="product-card">
+          <a class="product-link" href="./services/1v1-consulting.html">
+            <div class="service-media a" aria-hidden="true"></div>
+            <h3 class="product-title">1V1技术咨询</h3>
+          </a>
+          <p class="product-tagline">针对性解决，少走弯路</p>
+          <ul class="product-list">
+            <li>60分钟深度咨询</li>
+            <li>问题诊断与方案设计</li>
+            <li>可执行行动清单</li>
+            <li>14天内邮件 / 消息答疑</li>
+          </ul>
+          <a class="product-price" href="./pay/1v1-consulting.html">¥ 499/次</a>
+        </article>
+
+        <article class="product-card">
+          <a class="product-link" href="./services/advisory-retainer.html">
+            <div class="service-media b" aria-hidden="true"></div>
+            <h3 class="product-title">包月咨询陪跑</h3>
+          </a>
+          <p class="product-tagline">30天4次深度技术指导</p>
+          <ul class="product-list">
+            <li>30天内4次深度咨询</li>
+            <li>问题诊断与方案设计</li>
+            <li>可执行行动清单</li>
+            <li>60天内邮件 / 消息答疑</li>
+          </ul>
+          <a class="product-price" href="./pay/advisory-retainer.html">¥ 1999/月</a>
+        </article>
+
+        <article class="product-card">
+          <a class="product-link" href="./services/mvp-sprint.html">
+            <div class="service-media c" aria-hidden="true"></div>
+            <h3 class="product-title">MVP跑通包</h3>
+          </a>
+          <p class="product-tagline">跑通核心闭环工作流</p>
+          <ul class="product-list">
+            <li>4-6周项目陪跑</li>
+            <li>提供远程&技术执行</li>
+            <li>跑通&交付核心工作流</li>
+            <li>3个月内项目复盘&优化</li>
+          </ul>
+          <a class="product-price" href="./pay/mvp-sprint.html">¥ 6800/次</a>
+        </article>
+
+        <article class="product-card">
+          <a class="product-link" href="./services/custom-development.html">
+            <div class="service-media d" aria-hidden="true"></div>
+            <h3 class="product-title">深度开发定制</h3>
+          </a>
+          <p class="product-tagline">定制化工具开发服务</p>
+          <ul class="product-list">
+            <li>定制化需求开发</li>
+            <li>自动化脚本 / Agent 链路</li>
+            <li>网页与服务系统整合</li>
+            <li>按项目范围报价交付</li>
+          </ul>
+          <a class="product-price" href="./pay/custom-development.html">¥ 19800起</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="dark-products" id="solutions">
+      <div class="container">
+        <h2>清晰、实用、可落地的技术服务</h2>
+        <div class="dark-tabs" role="tablist" aria-label="技术服务分类">
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="0">AI 工作流</button>
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="1">个人品牌</button>
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="2">自动化执行</button>
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="3">服务页设计</button>
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="4">内容系统</button>
+          <button class="dark-tab active" role="tab" aria-selected="true" data-slide="5">技术咨询</button>
+          <button class="dark-tab" role="tab" aria-selected="false" data-slide="6">产品化服务</button>
+        </div>
+
+        <div class="feature-carousel" data-feature-carousel>
+          <button class="feature-arrow feature-arrow-prev" type="button" aria-label="上一项">←</button>
+
+          <div class="feature-track" data-feature-track>
+            <article class="feature-slide" data-slide-index="0">
+              <div class="feature-panel side">
+                <span>AI 工作流搭建</span>
+              </div>
+            </article>
+
+            <article class="feature-slide" data-slide-index="1">
+              <div class="feature-panel side">
+                <span>个人品牌定位</span>
+              </div>
+            </article>
+
+            <article class="feature-slide is-active" data-slide-index="2">
+              <div class="feature-panel main">
+                <h3>1v1 AI 工作流咨询</h3>
+                <p>
+                  一次深度梳理你当前的工具、流程、内容与商业路径，帮你识别关键瓶颈，
+                  明确优先级，并给出更适合你现阶段的执行方案。
+                </p>
+                <a class="feature-cta" href="#products">查看服务详情 →</a>
+              </div>
+            </article>
+
+            <article class="feature-slide" data-slide-index="3">
+              <div class="feature-panel side secondary">
+                <span>服务页转化优化</span>
+              </div>
+            </article>
+
+            <article class="feature-slide" data-slide-index="4">
+              <div class="feature-panel side">
+                <span>内容系统搭建</span>
+              </div>
+            </article>
+
+            <article class="feature-slide" data-slide-index="5">
+              <div class="feature-panel side secondary">
+                <span>自动化执行链路</span>
+              </div>
+            </article>
+
+            <article class="feature-slide" data-slide-index="6">
+              <div class="feature-panel side">
+                <span>产品化服务设计</span>
+              </div>
+            </article>
+          </div>
+
+          <button class="feature-arrow feature-arrow-next" type="button" aria-label="下一项">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="news container" id="news">
+      <div class="section-head">
+        <h2>内容与案例</h2>
+        <a href="#">查看更多 →</a>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-feature">
+          <time datetime="2023-01-10">2023/01/10</time>
+          <div class="news-cover" aria-hidden="true">
+            <div class="cover-copy">
+              <span>Irregular Square</span>
+              <strong>AI Workflow</strong>
+            </div>
+          </div>
+          <h3>如何把个人品牌、技术服务与 AI 工作流整合成一个真正能持续运转的系统</h3>
+          <p>从定位、页面、内容到交付链路，逐步搭建一个既能展示自己、又能承接咨询与产品销售的个人品牌站点。</p>
+        </article>
+
+        <div class="news-list">
+          <article class="news-item">
+            <time datetime="2022-12-15">2022/12/15</time>
+            <div>
+              <h4>为什么多数人的 AI 使用还停留在聊天层，而没有进入工作流层</h4>
+              <p>真正的差距不在工具数量，而在是否形成了稳定的输入、处理、输出与复盘机制。</p>
+            </div>
+            <span class="news-arrow">→</span>
+          </article>
+          <article class="news-item">
+            <time datetime="2022-12-08">2022/12/08</time>
+            <div>
+              <h4>服务页为什么总是“看起来不错”，但就是没有人咨询</h4>
+              <p>问题通常不在视觉，而在定位不清、价值表达模糊，以及 CTA 没有形成闭环。</p>
+            </div>
+            <span class="news-arrow">→</span>
+          </article>
+          <article class="news-item">
+            <time datetime="2022-08-28">2022/08/28</time>
+            <div>
+              <h4>从 WordPress 到静态站：个人技术服务官网该如何选择架构</h4>
+              <p>围绕维护成本、速度、自动化与迭代效率，选择更适合你当前阶段的技术路径。</p>
+            </div>
+            <span class="news-arrow">→</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners container" id="about">
+      <h2>适合一起工作的对象</h2>
+      <div class="logo-grid">
+        <div class="logo-item">创作者</div>
+        <div class="logo-item">独立开发者</div>
+        <div class="logo-item">技术顾问</div>
+        <div class="logo-item">个体经营者</div>
+        <div class="logo-item">产品经理</div>
+        <div class="logo-item">训练营主理人</div>
+        <div class="logo-item">内容团队</div>
+        <div class="logo-item">咨询业务</div>
+        <div class="logo-item">知识产品</div>
+        <div class="logo-item">品牌官网</div>
+      </div>
+      <div class="partner-controls" aria-hidden="true">
+        <span class="control">←</span>
+        <span class="control active">→</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="careers">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><img src="./brand/markwavelogo.svg" alt=""></span>
+          <span class="brand-copy">
+            <strong>MarkWave</strong>
+            <small>AI Workflow Studio</small>
+          </span>
+        </div>
+        <p>面向创作者与技术型个体的 AI 工作流与个人品牌技术顾问</p>
+        <p>专注：AI 自动化、服务页构建、内容系统、技术服务产品化</p>
+        <p>咨询方式：微信 / 表单 / 线上会议</p>
+        <p>联系邮箱：hello@markwave.example</p>
+        <div class="copyright">Copyright © MarkWave | Built for AI workflow and service business</div>
+      </div>
+
+      <div class="footer-col">
+        <h3>快速入口</h3>
+        <div class="footer-links">
+          <a href="#">首页</a>
+          <a href="#products">服务介绍</a>
+          <a href="#solutions">解决方案</a>
+          <a href="#news">内容与案例</a>
+          <a href="#careers">联系我</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3>服务方向</h3>
+        <div class="footer-links">
+          <a href="#">AI 工作流咨询</a>
+          <a href="#">顾问陪跑</a>
+          <a href="#">服务页与官网设计</a>
+          <a href="#">知识产品结构设计</a>
+          <a href="#">内容系统优化</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3>关注我们</h3>
+        <div class="qr" aria-hidden="true">
+          <div class="qr-grid"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      const carousel = document.querySelector('[data-feature-carousel]');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('[data-feature-track]');
+      const slides = Array.from(track.querySelectorAll('.feature-slide'));
+      const tabs = Array.from(document.querySelectorAll('.dark-tab'));
+      const prevButton = carousel.querySelector('.feature-arrow-prev');
+      const nextButton = carousel.querySelector('.feature-arrow-next');
+
+      let activeIndex = 2;
+
+      function setActive(index) {
+        activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === activeIndex);
+        });
+
+        tabs.forEach((tab, tabIndex) => {
+          const active = tabIndex === activeIndex;
+          tab.classList.toggle('active', active);
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+      }
+
+      function scrollToSlide(index) {
+        const slide = slides[index];
+        if (!slide) return;
+        track.scrollTo({
+          left: slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2,
+          behavior: 'smooth'
+        });
+        setActive(index);
+      }
+
+      function syncFromScroll() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        const center = track.scrollLeft + track.clientWidth / 2;
+
+        slides.forEach((slide, index) => {
+          const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+          const distance = Math.abs(center - slideCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        setActive(closestIndex);
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => scrollToSlide(index));
+      });
+
+      prevButton?.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+      nextButton?.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+      track.addEventListener('scroll', () => requestAnimationFrame(syncFromScroll));
+
+      setActive(activeIndex);
+      requestAnimationFrame(() => scrollToSlide(activeIndex));
+    })();
+  </script>
+</body>
+</html>

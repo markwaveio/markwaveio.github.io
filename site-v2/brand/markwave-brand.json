@@ -1,0 +1,46 @@
+{
+  "brand": {
+    "name": "MarkWave",
+    "tagline": "AI Workflow Studio",
+    "description": "AI 工作流与技术服务"
+  },
+  "logo": {
+    "markText": "MW",
+    "shape": "rounded-square"
+  },
+  "colors": {
+    "bg": "#F7F9FF",
+    "panel": "rgba(255, 255, 255, 0.82)",
+    "text": "#1D2B4F",
+    "muted": "#65708D",
+    "line": "rgba(110, 136, 255, 0.16)",
+    "primary": "#4B6BFF",
+    "secondary": "#6A39FF",
+    "accent": "#5FDCFF",
+    "headerBg": "rgba(255, 255, 255, 0.76)",
+    "heroGlow": "radial-gradient(circle at center, rgba(79, 179, 255, 0.62), rgba(90, 103, 255, 0.26) 42%, rgba(255,255,255,0) 72%)",
+    "sectionDark": "linear-gradient(135deg, #0D1A7A 0%, #1228A8 42%, #0F1773 100%)",
+    "cardGradA": "linear-gradient(135deg, #EDF5FF 0%, #D6ECFF 44%, #B8F1FF 100%)",
+    "cardGradB": "linear-gradient(135deg, #F1F5FF 0%, #DEF0FF 46%, #CAE4FF 100%)",
+    "cardGradC": "linear-gradient(135deg, #F0F0FF 0%, #DDD8FF 42%, #CFBAFF 100%)",
+    "wave": "linear-gradient(90deg, #6D45FF 0%, #5768FF 48%, #4CC9FF 100%)"
+  },
+  "typography": {
+    "fontSans": "Inter, PingFang SC, Noto Sans SC, Microsoft YaHei, sans-serif",
+    "fontDisplay": "Inter, PingFang SC, Noto Sans SC, Microsoft YaHei, sans-serif"
+  },
+  "radius": {
+    "xl": "36px",
+    "lg": "26px",
+    "md": "20px",
+    "sm": "14px"
+  },
+  "shadow": {
+    "lg": "0 30px 90px rgba(82, 104, 255, 0.20)",
+    "md": "0 16px 40px rgba(73, 104, 224, 0.16)",
+    "sm": "0 10px 20px rgba(72, 91, 180, 0.10)"
+  },
+  "layout": {
+    "container": "min(1180px, calc(100% - 40px))"
+  }
+}
