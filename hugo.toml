@@ -17,21 +17,25 @@ title = 'MarkWave'
     pageRef = '/posts'
     weight = 20
   [[menu.main]]
-    name = '视频教程'
+    name = '分类'
     url = '/categories/'
     weight = 30
   [[menu.main]]
-    name = '工具&导航'
+    name = '标签'
     url = '/tags/'
     weight = 40
   [[menu.main]]
-    name = '人工咨询'
-    url = '/Q&A/'
-    weight = 50
+    name = '知识库'
+    pageRef = '/knowledge'
+    weight = 45
+  [[menu.main]]
+    name = '咨询'
+    pageRef = '/consulting'
+    weight = 48
   [[menu.main]]
     name = '合作'
     pageRef = '/cooperation'
-    weight = 60
+    weight = 50
 
 [params]
   author = 'Mark'
@@ -41,8 +45,13 @@ title = 'MarkWave'
   email = 'hello@markwave.io'
   x_url = 'https://x.com/markwaveio'
   github_url = 'https://github.com/markwaveio'
-  hero_title = 'AI、效率系统与个人品牌的实践笔记'
-  hero_description = '这里沉淀我关于 AI 工具、内容创作、知识管理和个体效率系统的长期观察。目标是少一点噪音，多一点可执行经验。'
+  hero_title = '帮你把 AI 用成真正的生产力'
+  hero_description = '我是 Mark，专注 AI 工作流与个体效率系统。这里有可直接落地的教程、付费知识库，以及一对一咨询服务。'
+  hero_badge = '已帮助 300+ 人提升效率'
+  hero_cta_primary = '查看知识库'
+  hero_cta_primary_url = '/knowledge/'
+  hero_cta_secondary = '预约咨询'
+  hero_cta_secondary_url = '/consulting/'
 
 [markup]
   [markup.goldmark]

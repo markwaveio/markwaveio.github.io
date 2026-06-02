@@ -1,13 +1,16 @@
 <aside class="sidebar">
-  <section class="widget ad-widget">
-    <p class="widget-label">广告位</p>
-    {{ range first 1 site.Data.ads.ads.ads }}
-      <a class="ad-card" href="{{ .url }}" target="_blank" rel="sponsored noopener">
-        <strong>{{ .title }}</strong>
-        <span>{{ .description }}</span>
-      </a>
-    {{ end }}
-    <a class="text-link" href="/cooperation/">查看合作方式 →</a>
+  <section class="widget service-widget">
+    <p class="widget-label">付费服务</p>
+    <a class="service-card service-card--primary" href="/knowledge/">
+      <strong>📚 付费知识库</strong>
+      <span>AI 工作流、效率系统实战手册，持续更新，一次购买永久访问。</span>
+      <em>立即查看 →</em>
+    </a>
+    <a class="service-card service-card--secondary" href="/consulting/">
+      <strong>💬 一对一咨询</strong>
+      <span>60 分钟深度咨询，帮你解决 AI 落地的具体问题。</span>
+      <em>预约咨询 →</em>
+    </a>
   </section>
 
   <section class="widget">
